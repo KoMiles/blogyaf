@@ -30,8 +30,9 @@ class TestController extends    Yaf_Controller_Abstract
      */
     public function pdoAction() {
         $blogModels   =   new BlogPdoModels();
-        $result       =   $blogModels   ->getAllBlogs();
-
+        $result       =   $blogModels   ->getOneBlogs();
+        $this->getView()->assign('result'   , $result);
+        $this->getView()->display('test/test.html');
         exit;
     }
 }
