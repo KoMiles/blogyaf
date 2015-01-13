@@ -15,11 +15,6 @@ class TestController extends    Yaf_Controller_Abstract
      * 默认控制器
      */
     public function indexAction() {
-        //$arr    =   array('a','b','c');
-        //$arr    =   array_reverse($arr);
-        //var_dump($arr);exit;    
-        
-        
         $content   =   '这个是testController测试文件';
         $this->getView()->assign('content',$content);
         $this->getView()->display('test/index.html');
