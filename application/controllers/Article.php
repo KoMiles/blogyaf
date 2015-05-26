@@ -17,8 +17,14 @@ class ArticleController extends Yaf_Controller_Abstract {
      * @return void
      */
     public function indexAction() {
-        echo "index action";
+        $request = $this->getRequest()->getParams();
+        var_dump($request);
+        $request = $this->getRequest()->getParam('name');
+        var_dump($request);
+        echo "index article action";
+        exit;
     }
+
     /**
      * detailAction 
      * /index.php?m=index&c=article&a=detail
@@ -26,7 +32,7 @@ class ArticleController extends Yaf_Controller_Abstract {
      * @return void
      */
     public function detailAction() {
-        echo "detail action";
+        echo "index article detail action";
         exit;
     }
 }

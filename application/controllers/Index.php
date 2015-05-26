@@ -21,13 +21,18 @@ class IndexController extends Yaf_Controller_Abstract {
      */
     public function indexAction() {
         //查询当前使用的所有路由协议  
-        $routes = Yaf_Dispatcher::getInstance()->getRouter()->getRoutes();  
-        print_r($routes);  
+        //$routes = Yaf_Dispatcher::getInstance()->getRouter()->getRoutes();  
+        //print_r($routes);  
+        //echo "<hr/>";
         $site   =   Yaf_Application::app()->getConfig();
         $this->getView()->assign('content','hello world222~!');
         $this->getView()->display('index_1.html');
     }
     
+    public function listAction() {
+        echo "index list action";
+        exit;
+    }
     /**
      * 链接数据库
      * url:/index/index/testDb
@@ -40,6 +45,10 @@ class IndexController extends Yaf_Controller_Abstract {
         exit;
     }
     
+    public function detailAction() {
+        echo "this is index detail !";
+        exit;
+    }
     /**
      * 链接数据库
      */
