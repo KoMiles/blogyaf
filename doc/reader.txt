@@ -1,3 +1,11 @@
 blogyaf系统说明
 
 用yaf框架系统开发
+
+#重写，把所有请求都定位到index.php入口文件上
+location / {
+    if (!-e $request_filename) {
+        rewrite ^/(.*)$ /index.php?$1 last;
+    }
+}
+
