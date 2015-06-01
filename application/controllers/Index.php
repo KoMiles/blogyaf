@@ -10,8 +10,6 @@
 #      History: 2014-12-14
 =============================================================================*/
 
-include APP_PATH.'/application/models/Blog.php';
-header("Content-type: text/html; charset=utf-8"); 
 class IndexController extends Yaf_Controller_Abstract {
     public function init() {
         Yaf_Dispatcher::getInstance()->disableView();
@@ -24,12 +22,19 @@ class IndexController extends Yaf_Controller_Abstract {
         //$routes = Yaf_Dispatcher::getInstance()->getRouter()->getRoutes();  
         //print_r($routes);  
         //echo "<hr/>";
+        $re = $this->getModuleName();
+$re = $this->getRequest()->getModuleName();
+$re = $this->getRequest()->getActionName();
+var_dump($re);
+exit;
         $site   =   Yaf_Application::app()->getConfig();
         $this->getView()->assign('content','hello world222~!');
         $this->getView()->display('index_1.html');
     }
     
     public function listAction() {
+$re = $this->getRequest()->getActionName();
+var_dump($re);
         echo "index list action";
         exit;
     }
