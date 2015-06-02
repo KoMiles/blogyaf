@@ -141,4 +141,13 @@ class TestController extends    Yaf_Controller_Abstract {
         $re = $this->getRequest()->isGet();
         var_dump($re);exit;
     }
+    /**
+     * routeAction
+     *
+     * @access public
+     * @return void
+     */
+    public function routeAction() {
+        echo "生效的路由协议是:" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
+    }
 }
