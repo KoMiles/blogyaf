@@ -109,6 +109,8 @@ class TestController extends    Yaf_Controller_Abstract {
      * @return void
      */
     public function routeAction() {
+        echo "this is :" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
+        exit;
         //获取当前请求类型
         $re = $this->getRequest()->getMethod();
         var_dump($re);
@@ -142,12 +144,16 @@ class TestController extends    Yaf_Controller_Abstract {
         var_dump($re);exit;
     }
     /**
-     * routeAction
+     * isModuleAction
      *
      * @access public
      * @return void
      */
-    public function routeAction() {
-        echo "生效的路由协议是:" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
+    public function isModuleAction() {
+        echo 222;
+        $routes = Yaf_Dispatcher::getInstance()->isModuleNamer("Index");
+        var_dump($routes);
+        echo 1111;
     }
+
 }
