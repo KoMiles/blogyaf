@@ -12,6 +12,7 @@ class ArticleController extends BasicController {
 
     private function init(){
         $this->m_article = $this->load('Article');
+
     }
 
     public function indexAction(){
@@ -19,7 +20,7 @@ class ArticleController extends BasicController {
     }
 
     /**
-     * detailAction 
+     * detailAction
      * /index.php?m=index&c=article&a=detail
      * @access public
      @return void
@@ -30,6 +31,7 @@ class ArticleController extends BasicController {
     }
     public function routeAction() {
         echo "test";
+        echo "detail action ";
         echo "route is :" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
     }
 
