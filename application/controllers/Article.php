@@ -1,11 +1,11 @@
 <?php
 /**
  * ArticleController 
- *
+ * 
  * @uses BasicController
- * @package
- * @version $Id
- * @author wangkongming <wangkongming@babytree-inc.com> 
+ * @package 
+ * @version $Id$
+ * @author wangkongming <komiles@163.com> 
  */
 class ArticleController extends BasicController {
     private $m_article;
@@ -15,6 +15,12 @@ class ArticleController extends BasicController {
 
     }
 
+    /**
+     * indexAction 
+     * 
+     * @access public
+     * @return void
+     */
     public function indexAction(){
         echo 'Article index'; die;
     }
