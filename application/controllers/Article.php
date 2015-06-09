@@ -1,12 +1,12 @@
 <?php
 /**
  * ArticleController 
- * 文章控制器
+ * 
  * @uses BasicController
  * @package 
  * @version $Id$
  * @author wangkongming <komiles@163.com> 
- * @date 2015-06-05 10:40:03
+ * @date 2015-06-09 18:48:32
  */
 class ArticleController extends BasicController {
     private $m_article;
@@ -16,6 +16,12 @@ class ArticleController extends BasicController {
 
     }
 
+    /**
+     * indexAction 
+     * 
+     * @access public
+     * @return void
+     */
     public function indexAction(){
         echo 'Article index'; die;
     }
