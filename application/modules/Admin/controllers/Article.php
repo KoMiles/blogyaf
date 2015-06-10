@@ -20,9 +20,46 @@ class ArticleController extends BasicController {
         $this->homeUrl = '/admin/article';
     }
 
+    /**
+     * indexAction
+     * 文章管理首页
+     * @access public
+     * @return void
+     */
     public function indexAction(){
-        echo 'article admin index';
+        $article_list = $this->m_article->getArticlesList();
+        foreach ($article_list as $key => $row) {
+            $article_list[$key]['date'] = date('Y-m-d H:i:s',$row['create_ts']);
+            $article_list[$key]['statusCn'] = $row['status'] == 'normal' ? '正常' : '已删除';
+        }
+        $this->getView()->assign('article_list', $article_list);
+        $this->getView()->display('index.html');
     }
 
+    /**
+     * addAction 
+     * 添加文章
+     * @access public
+     * @return void
+     */
+    public function addAction() {
+        $this->getView()->display('add.html');
+    }
 
+    /**
+     * modifyAction 
+     * 修改文章
+     * @access public
+     * @return void
+     */
+    public function modifyAction() {
+        //post方式获取参数
+        $title = $this->getPost('title') ;
+        $author = $this->getPost('author') ;
+        $content = $this->getPost('content') ;
+var_dump($content);exit;
+
+        $result = $this->m_article->addArticle($title, $author, $content);
+        var_dump($result);
+    }
 }

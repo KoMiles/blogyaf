@@ -11,6 +11,7 @@ class BasicController extends Yaf_Controller_Abstract {
     }
 
     public function getPost($key, $filter = TRUE){
+
         if($filter){
             return filterStr($this->getRequest()->getPost($key));
         }else{

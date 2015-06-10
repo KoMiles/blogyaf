@@ -42,7 +42,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         Yaf_Loader::import('M_Model.pdo.php');
         Yaf_Loader::import('Helper.class.php');
 
-        //Helper::import('Basic');
+        Helper::import('Basic');
         //Helper::import('Network');
         Yaf_Loader::import('C_Basic.php');
     }
