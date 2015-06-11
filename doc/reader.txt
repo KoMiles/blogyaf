@@ -9,3 +9,24 @@ location / {
     }
 }
 
+//下面这个是一个nginx配置的例子
+server {
+        listen 80;
+        server_name www.yaf.com; #绑定域名
+        index index.htm index.html index.php; #默认文件
+        root /data/webroot/testRoot/public; #网站根目录
+        location / {
+            if (!-e $request_filename) {
+                rewrite ^/(.*)$ /index.php?$1 last;
+            }
+        }
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+        }
+        access_log /data/logs/test_access.log;
+        error_log /data/logs/test_error.log;
+}
+
+
