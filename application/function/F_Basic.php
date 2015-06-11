@@ -8,7 +8,6 @@
 
 // Anti_SQL Injection, escape quotes
 function filter($content) {
-        echo 22222;
     if (!get_magic_quotes_gpc()) {
         return addslashes($content);
     } else {

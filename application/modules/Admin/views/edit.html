@@ -1,0 +1,16 @@
+<?php include('header.html');?>
+
+<p>修改文章</p>
+<form method="post" action="/admin/article/modify">
+    文章编号：<input type="text" name="id" value="<?php echo $article_info['id']?>"> <br/>
+    文章标题：<input type="text" name="title" value="<?php echo $article_info['title']?>"> <br/>
+    作者：<input type="text" name="author" value="<?php echo $article_info['author']?>"> <br/>
+    内容：
+<textarea rows="3" cols="20" name="content">
+<?php echo $article_info['content']?>
+</textarea>
+    <input type="submit" value="修改">
+    <input type="hidden" value="type" name="edit" />
+</form>
+
+<?php include('footer.html');?>

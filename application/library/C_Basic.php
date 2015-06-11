@@ -27,6 +27,14 @@ class BasicController extends Yaf_Controller_Abstract {
         }
     }
 
+    public function getParam($key, $filter = TRUE){
+        if($filter){
+            return filterStr($this->getRequest()->getParam($key));
+        }else{
+            return $this->getRequest()->getParam($key);
+        }
+    }
+
     public function getSession($key){
         return Yaf_Session::getInstance()->__get($key);
     }

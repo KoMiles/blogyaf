@@ -11,7 +11,7 @@
         <td><?php echo $row['content'];?></td>
         <td><?php echo $row['statusCn'];?></td>
         <td><?php echo $row['date'];?></td>
-        <td><a href="">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="">删除</a></td>
+        <td><a href="/admin/article/edit/<?php echo $row['id']?>/">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/article/delete/<?php echo $row['id']?>">删除</a></td>
     </tr>
     <?php }?>
 </table>
