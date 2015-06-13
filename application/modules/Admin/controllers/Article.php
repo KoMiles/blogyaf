@@ -17,6 +17,7 @@ class ArticleController extends BasicController {
         //Yaf_Registry::get('adminPlugin')->checkLogin();
 
         $this->m_article = $this->load('Article');
+        Helper::import('Basic');
         $this->homeUrl = '/admin/article';
     }
 
@@ -26,7 +27,20 @@ class ArticleController extends BasicController {
      * @access public
      * @return void
      */
-    public function indexAction(){
+    public function indexAction() {
+        //$this->forward("Admin","Article","list");
+        //$this->forward("list");
+        echo "this is admin article index";
+        exit;
+    }
+
+    /**
+     * listAction 
+     * 
+     * @access public
+     * @return void
+     */
+    public function listAction(){
         $article_list = $this->m_article->getArticlesList();
         foreach ($article_list as $key => $row) {
             $article_list[$key]['date'] = date('Y-m-d H:i:s',$row['create_ts']);
@@ -35,7 +49,6 @@ class ArticleController extends BasicController {
         $this->getView()->assign('article_list', $article_list);
         $this->getView()->display('index.html');
     }
-
     /**
      * modifyAction 
      * 修改文章
@@ -52,16 +65,28 @@ class ArticleController extends BasicController {
             //添加文章
             $result = $this->m_article->addArticle($title, $author, $content);
         } else if($type == 'edit') {
+            $id = $this->getPost('id') ;
             //编辑文章
             $result = $this->m_article->updateArticle($id,$title, $author, $content);
         }
-        var_dump($result);
+        if($result > 0 ) {
+            gotoURL('操作成功','/admin/article/list/');
+            exit;
+        }
+        exit;
     }
 
+    /**
+     * viewAction 
+     * 显示文章
+     * @access public
+     * @return void
+     */
     public function viewAction() {
         //获取参数
         $op = $this  ->getRequest() ->  getParam('op');
-        $id = $this -> getRequest() ->  getParam('id');
+       // $id = $this -> getRequest() ->  getParam('id');
+        $id = $this  ->  getParam('id');
         switch($op) {
             case  'add':
                 $view = 'add';
@@ -81,11 +106,12 @@ class ArticleController extends BasicController {
             $article_info = $this ->m_article ->getArticleInfo($id);
             $this->getView()->assign('article_info',$article_info);
             $this->getView()->display($view.'.html');
+            exit;
         } else {
             //执行删除操作
             $result = $this->m_article->deleteArticle($id);
-            var_dump($result);
-           // jsRedirect('/admin/article/index/');
+            gotoURL('操作成功','/admin/article/list/');
+            exit;
         }
     }
 }

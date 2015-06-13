@@ -138,6 +138,8 @@ function redirect($URL = '', $second = 0) {
 
 // Redirect and display message
 function gotoURL($message = '', $URL = '') {
+
+    header("Content-type:text/html;charset=utf-8");
     if (!isset($URL)) {
         $URL = $_SERVER['HTTP_REFERER'];
     }

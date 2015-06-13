@@ -1,10 +1,10 @@
 <?php
 /**
- * M_Article 
- * 
+ * M_Article
+ * 文章相关models
  * @uses M
  * @uses _Model
- * @package 
+ * @package
  * @version $Id$
  * @author wangkongming <komiles@163.com> 
  * @date 2015-06-11 11:59:06
