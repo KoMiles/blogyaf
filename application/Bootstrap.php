@@ -47,16 +47,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         Yaf_Loader::import('C_Basic.php');
     }
 
-
-    /**
-     * 注册一个插件
-     * 插件的目录是在application_directory/plugins
-     */
-    public function _initPlugin(Yaf_Dispatcher $dispatcher) {
-        //$user = new UserPlugin();
-        //$dispatcher->registerPlugin($user);
-    }
-
     /**
      * 添加配置中的路由
      */
@@ -66,10 +56,25 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     }
 
     /**
+     * 注册一个插件
+     * 插件的目录是在application_directory/plugins
+     */
+    public function _initPlugin(Yaf_Dispatcher $dispatcher) {
+        $router = new RouterPlugin();
+        $dispatcher->registerPlugin($router);
+
+        //$admin = new AdminPlugin();
+        //$dispatcher->registerPlugin($admin);
+        //Yaf_Registry::set('adminPlugin', $admin);
+}
+
+
+    /**
      * 自定义视图引擎
      */
     public function _initSmarty(Yaf_Dispatcher $dispatcher) {
         //$smarty = new Smarty_Adapter(null, Yaf_Registry::get("config")->get("smarty"));
         //Yaf_Dispatcher::getInstance()->setView($smarty);
     }
+
 }
