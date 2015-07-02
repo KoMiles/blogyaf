@@ -190,6 +190,7 @@ abstract class M_Model {
      */
     final public function Select(){
         $this->sql = $this->generateSQL();
+        //echo $this->sql;
 
         // 连接DB
         $this->connect('READ');

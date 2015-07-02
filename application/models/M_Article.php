@@ -17,7 +17,13 @@ class M_Article extends M_Model {
     }
 
     // 查询文章列表
-    public function getArticlesList(){
+    public function getArticlesList($page, $pageSize){
+        $start = 0;
+        if($page > 1) {
+            $start = ($page-1) * $pageSize;
+        }
+        $limit = " {$start} , {$pageSize} ";
+        $this->Limit($limit);
         return $this->Select();
     }
 
@@ -87,5 +93,9 @@ class M_Article extends M_Model {
             return false;
         }
         return $this->DeleteByID($id);
+    }
+
+    public function getArticlesCount() {
+        return $this->Total();
     }
 }
