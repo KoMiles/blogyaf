@@ -1,10 +1,8 @@
-yaf demo test
-======================
 ## 记录yaf学习历程
-方便yaf入门
+方便yaf入门，写了一个demo
 
-## 查看文档效果
-通过将生成的文档放到master分支中，可以通过链接<https://github.com/KoMiles/blogyaf>直接查看源码
+## 查看代码效果
+可以通过链接<https://github.com/KoMiles/blogyaf>直接查看源码
 
 ## 贡献者
 komiles@163.com
