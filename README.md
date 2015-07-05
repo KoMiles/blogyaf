@@ -12,6 +12,9 @@ komiles@163.com
 ##如何在linux下面安装yaf
 
 - 把项目中的yaf.so放在/usr/lib/php5/20121212/下面
+```
+cp yaf.so /usr/lib/php5/20121212/
+```
 - 在/etc/php5/cgi/conf.d/下面添加yaf.so
 ```
 extension=yaf.so
@@ -26,6 +29,8 @@ service php5-fpm restart
 ```
 - 重启php-cgi
 先杀死 kill -9 pid(php-cgi的进程)
+```
 php-cgi -b 127.0.0.1:9000
+```
 
 
