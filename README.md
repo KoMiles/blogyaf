@@ -4,7 +4,7 @@ yaf demo test
 方便yaf入门
 
 ## 查看文档效果
-通过将生成的文档放到master分支中，可以通过链接<git@github.com:KoMiles/blogyaf.git>直接查看源码
+通过将生成的文档放到master分支中，可以通过链接<https://github.com/KoMiles/blogyaf>直接查看源码
 
 ## 贡献者
 komiles@163.com
