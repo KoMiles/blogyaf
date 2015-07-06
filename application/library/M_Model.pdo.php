@@ -3,8 +3,8 @@ abstract class M_Model {
 
     private static $obj;
     private static $conn;
-    private $result = NULL;             
-    protected $table = '';              
+    private $result = NULL;
+    protected $table = '';
     private $options = '';              // SQL 中的 field, where, orderby, limit
     private $selectOne = FALSE;
 
@@ -24,19 +24,12 @@ abstract class M_Model {
      * @param string => use default DB if parameter is not specified !
      * @return NULL
      */
-    function __construct($db = '') {
+    function __construct() {
         $this->logFile = APP_PATH. '/log/sql/'.CUR_DATE.'.log';
         if(!file_exists($this->logFile)){
             touch($this->logFile);
         }
-
-        if($db){
-            $this->connect($db);
-        }else{
-            if(!$this->conn){
-                $this->connect();
-            }
-        }
+        $this->connect();
     }
 
     /**
@@ -47,7 +40,7 @@ abstract class M_Model {
      */
     private function connect($type = 'WRITE') {
         $config = Yaf_Application::app()->getConfig();
-        
+
         $db     = $config['Default'];
         $driver = $config['TYPE'];
         $host   = $config[$type.'_HOST'];
@@ -372,7 +365,7 @@ abstract class M_Model {
      * Generate SQL by options
      */
     final protected function generateSQL(){
-        $field = $this->options['field'];
+        $field = isset($this->options['field']) ? $this->options['field'] : '';
         if(!$field){
             $field = '*';
         }

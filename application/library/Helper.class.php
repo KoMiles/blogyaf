@@ -9,163 +9,163 @@
 
 abstract class Helper {
 
-	private static $obj;
+    private static $obj;
 
-	/**
-	 * Import function
-	 *
-	 * @param string file to be imported
-	 * @return null
-	 */
-	public static function import($file) {
-		$file     = ucfirst($file);
-		$function = 'F_'.$file;
-		$f_file   = FUNC_PATH.'/'.$function.'.php';
+    /**
+     * Import function
+     *
+     * @param string file to be imported
+     * @return null
+     */
+    public static function import($file) {
+        $file     = ucfirst($file);
+        $function = 'F_'.$file;
+        $f_file   = FUNC_PATH.'/'.$function.'.php';
 
-		if(file_exists($f_file)){
-			Yaf_Loader::import($f_file);
-			unset($file, $function, $f_file);
-		}else{
-			$traceInfo = debug_backtrace();
-			$error = 'Function '.$file.' NOT FOUND !';
-			self::raiseError($traceInfo, $error);
-		}
-	}
+        if(file_exists($f_file)){
+            Yaf_Loader::import($f_file);
+            unset($file, $function, $f_file);
+        }else{
+            $traceInfo = debug_backtrace();
+            $error = 'Function '.$file.' NOT FOUND !';
+            self::raiseError($traceInfo, $error);
+        }
+    }
 
-	
-	/**
-	 * Load Component
-	 * @return componment
-	 */
-	public static function loadComponment($c){
-		$componment = 'Com_'.ucfirst($c);
+    
+    /**
+     * Load Component
+     * @return componment
+     */
+    public static function loadComponment($c){
+        $componment = 'Com_'.ucfirst($c);
 
-		$hash = md5($componment);
-		if(self::$obj[$hash]){
-			return self::$obj[$hash];
-		}
+        $hash = md5($componment);
+        if(self::$obj[$hash]){
+            return self::$obj[$hash];
+        }
 
-		$file = APP_PATH .'/application/componment/' . $componment .'.php';
-		
-		if(file_exists($file)){
-			Yaf_Loader::import($file);
-		} else {
-			$traceInfo = debug_backtrace();
-			$error = 'Componment '.$componment.' NOT FOUND !';
-			self::raiseError($traceInfo, $error);
-		}
+        $file = APP_PATH .'/application/componment/' . $componment .'.php';
+        
+        if(file_exists($file)){
+            Yaf_Loader::import($file);
+        } else {
+            $traceInfo = debug_backtrace();
+            $error = 'Componment '.$componment.' NOT FOUND !';
+            self::raiseError($traceInfo, $error);
+        }
 
-		try{
-			self::$obj[$hash] = new $componment();
-			return self::$obj[$hash];
-		} catch(Exception $error) {
-			$traceInfo = debug_backtrace();
-			$error = 'Load Componment '.$componment.' FAILED !';
-			self::raiseError($traceInfo, $error);
-		}
-	}
+        try{
+            self::$obj[$hash] = new $componment();
+            return self::$obj[$hash];
+        } catch(Exception $error) {
+            $traceInfo = debug_backtrace();
+            $error = 'Load Componment '.$componment.' FAILED !';
+            self::raiseError($traceInfo, $error);
+        }
+    }
 
-	
-	/**
-	 * Load model
-	 * <br />After loading a model, the new instance will be added into $obj immediately,
-	 * <br />which is used to make sure that the same model is only loaded once per page !
-	 *
-	 * @param string => model to be loaded
-	 * @return new instance of $model or raiseError on failure !
-	 */
-	public static function load($model) {
-		$path = '';
+    
+    /**
+     * Load model
+     * <br />After loading a model, the new instance will be added into $obj immediately,
+     * <br />which is used to make sure that the same model is only loaded once per page !
+     *
+     * @param string => model to be loaded
+     * @return new instance of $model or raiseError on failure !
+     */
+    public static function load($model) {
+        $path = '';
 
-		//新增分组功能
-		if(strpos($model, '/') !== FALSE){
-			list($category, $model) = explode('/', $model);
-			$path = '/'. $category;
-		}
-		
-		$hash = md5($path . $model);
+        //新增分组功能
+        if(strpos($model, '/') !== FALSE){
+            list($category, $model) = explode('/', $model);
+            $path = '/'. $category;
+        }
+        
+        $hash = md5($path . $model);
 
-		if(self::$obj[$hash] && is_object(self::$obj[$hash])) {
-			return self::$obj[$hash];
-		}
+        if(self::$obj[$hash] && is_object(self::$obj[$hash])) {
+            return self::$obj[$hash];
+        }
 
-		$file = MODEL_PATH .$path .'/M_'.$model.'.php';
-		
-		if(!file_exists($file)) {
-			// 加载默认模型, 减少没啥通用方法的模型
-			$default = TRUE;
-			$table   = strtolower($model);
-			$model   = 'M_Default';
-			$file    = MODEL_PATH.'/'.$model.'.php';
-		}
+        $file = MODEL_PATH .$path .'/M_'.$model.'.php';
+        
+        if(!file_exists($file)) {
+            // 加载默认模型, 减少没啥通用方法的模型
+            $default = TRUE;
+            $table   = strtolower($model);
+            $model   = 'M_Default';
+            $file    = MODEL_PATH.'/'.$model.'.php';
+        }
 
-		$re = Yaf_Loader::import($file);
+        Yaf_Loader::import($file);
 
-		try{
-			if($default){
-				self::$obj[$hash] = new $model($table);
-			}else{
-				$model = 'M_'.$model;
-				self::$obj[$hash] = new $model;	
-			}
-			
-			unset($model, $default, $table, $file, $path, $category);
-			return self::$obj[$hash];
-		}catch(Exception $error) {
-			$traceInfo = debug_backtrace();
-			$error = 'Load model '.$model.' FAILED !';
-			Helper::raiseError($traceInfo, $error);
-		}
-	}
-	
-	
-	/**
-	 * Response
-	 * 
-	 * @param string $format : json, xml, jsonp, string
-	 * @param array $data: 
-	 * @param boolean $die: die if set to true, default is true
-	 */
-	public static function response($data, $format = 'json', $die = TRUE) {
-		switch($format){
-			default:
-			case 'json':
-				$file = FUNC_PATH.'/F_String.php';
-				Yaf_Loader::import($file);
-				if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest"){ 
-					$data = JSON($data);
-				}else if(isset($_REQUEST['ajax'])){
-					$data = JSON($data);
-				}else{
-					pr($data); die; // URL 测试打印数组出来
-				}
-			break;
-			
-			case 'jsonp':
-				$data = $_GET['jsoncallback'] .'('. json_encode($data) .')';
-			break;
-			
-			case 'string':
-			break;
-		}
+        try{
+            if(isset($default) && $default){
+                self::$obj[$hash] = new $model($table);
+            }else{
+                $model = 'M_'.$model;
+                self::$obj[$hash] = new $model; 
+            }
+            
+            unset($model, $default, $table, $file, $path, $category);
+            return self::$obj[$hash];
+        }catch(Exception $error) {
+            $traceInfo = debug_backtrace();
+            $error = 'Load model '.$model.' FAILED !';
+            Helper::raiseError($traceInfo, $error);
+        }
+    }
+    
+    
+    /**
+     * Response
+     * 
+     * @param string $format : json, xml, jsonp, string
+     * @param array $data: 
+     * @param boolean $die: die if set to true, default is true
+     */
+    public static function response($data, $format = 'json', $die = TRUE) {
+        switch($format){
+            default:
+            case 'json':
+                $file = FUNC_PATH.'/F_String.php';
+                Yaf_Loader::import($file);
+                if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest"){ 
+                    $data = JSON($data);
+                }else if(isset($_REQUEST['ajax'])){
+                    $data = JSON($data);
+                }else{
+                    pr($data); die; // URL 测试打印数组出来
+                }
+            break;
+            
+            case 'jsonp':
+                $data = $_GET['jsoncallback'] .'('. json_encode($data) .')';
+            break;
+            
+            case 'string':
+            break;
+        }
 
-		echo $data;
-		
-		if($die){
+        echo $data;
+        
+        if($die){
             die;
-		}
-	}
+        }
+    }
 
 
-	/**
-	 * Raise error and halt if it is under UAT
-	 *
-	 * @param string debug back trace info
-	 * @param string error to display
-	 * @param string error SQL statement
-	 * @return null
-	 */
-	public static function raiseError($traceInfo, $error, $sql = '') {
+    /**
+     * Raise error and halt if it is under UAT
+     *
+     * @param string debug back trace info
+     * @param string error to display
+     * @param string error SQL statement
+     * @return null
+     */
+    public static function raiseError($traceInfo, $error, $sql = '') {
         $errorMsg = "<h2 style='color:red'>Error occured !</h2>";
         $errorMsg .= '<h3>' . $error . '</h3>';
         if ($sql) {
@@ -206,6 +206,6 @@ abstract class Helper {
             </html>';
             die($html);
         }
-	}
+    }
 
 }
