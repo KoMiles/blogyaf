@@ -104,6 +104,7 @@ abstract class M_Model {
      * Where
      */
     final public function Where($where){
+        $str = '';
         if(!$where){
             return $this;
         }
@@ -377,7 +378,7 @@ abstract class M_Model {
             $sql .= ' WHERE '. $where;
         }
 
-        $order = $this->options['order'];
+        $order = isset($this->options['order']) ? $this->options['order'] : '';
         if($order){
             $sql .= ' ORDER BY '. $order;
         }
