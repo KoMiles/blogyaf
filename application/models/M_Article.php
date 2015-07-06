@@ -17,13 +17,17 @@ class M_Article extends M_Model {
     }
 
     // 查询文章列表
-    public function getArticlesList($page, $pageSize){
+    public function getArticlesList($page, $pageSize, $status){
         $start = 0;
         if($page > 1) {
             $start = ($page-1) * $pageSize;
         }
         $limit = " {$start} , {$pageSize} ";
         $this->Limit($limit);
+        //$this->Where(array('status' => $status));
+        $this->Where("status='{$status}'");
+        $this->Order('create_ts desc ');
+        //echo '$this->generateSQL();
         return $this->Select();
     }
 
@@ -95,7 +99,8 @@ class M_Article extends M_Model {
         return $this->DeleteByID($id);
     }
 
-    public function getArticlesCount() {
+    public function getArticlesCount($status) {
+        $this->Where(array('status' => $status));
         return $this->Total();
     }
 }
