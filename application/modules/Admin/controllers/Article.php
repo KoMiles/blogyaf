@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ArticleController
  * 文章管理
@@ -10,14 +9,12 @@
  * @date 2015-06-09 10:23:41
  */
 class ArticleController extends BasicController {
-
     private $m_article;
 
     private function init(){
         //Yaf_Registry::get('adminPlugin')->checkLogin();
 
         $this->m_article = $this->load('Article');
-        Helper::import('Basic');
         $this->homeUrl = '/admin/article';
     }
 
@@ -27,43 +24,23 @@ class ArticleController extends BasicController {
      * @access public
      * @return void
      */
-<<<<<<< HEAD
-    public function indexAction(){
-        $pageSize = 10;
+    public function indexAction() {
+        $pageSize = 8;
         $page = $this->getQuery("page") ? $this->getQuery("page") : 1;
         $article_list = $this->m_article->getArticlesList($page, $pageSize);
-=======
-    public function indexAction() {
-        //$this->forward("Admin","Article","list");
-        //$this->forward("list");
-        echo "this is admin article index";
-        exit;
-    }
-
-    /**
-     * listAction 
-     * 
-     * @access public
-     * @return void
-     */
-    public function listAction(){
-        $article_list = $this->m_article->getArticlesList();
->>>>>>> ccd86f27c8bc6d5fee623f785dfaec59dea54de4
         foreach ($article_list as $key => $row) {
             $article_list[$key]['date'] = date('Y-m-d H:i:s',$row['create_ts']);
             $article_list[$key]['statusCn'] = $row['status'] == 'normal' ? '正常' : '已删除';
         }
-        //$total_num = $this->m_article -> getArticlesCount();
-        //$page_obj = new Pagination('',5);
-//var_dump($page_obj);
-        //$re = $page_obj -> render($page,$pageSize,$total_num);
-//var_dump($re);exit;
+        $total_num = $this->m_article -> getArticlesCount();
 
-        $page_string = generatePageLink($page, $pageSize, "/admin/article/index", $total_num);
+        $page_string = generatePageLink($page, $pageSize, $total_num, "/admin/article/index");
+        echo $page_string;
 
         $this->getView()->assign('page_string', $page_string);
         $this->getView()->assign('article_list', $article_list);
         $this->getView()->display('index.html');
+        exit;
     }
     /**
      * modifyAction 
@@ -73,7 +50,6 @@ class ArticleController extends BasicController {
      */
     public function modifyAction() {
         //post方式获取参数
-        $id = $this->getPost('id') ;
         $type = $this->getPost('type') ;
         $title = $this->getPost('title') ;
         $author = $this->getPost('author') ;
@@ -86,19 +62,12 @@ class ArticleController extends BasicController {
             //编辑文章
             $result = $this->m_article->updateArticle($id,$title, $author, $content);
         }
-<<<<<<< HEAD
         if($result) {
             javascriptRedirect('操作成功','/admin/article/index');
         } else {
             javascriptRedirect('操作失败','/admin/article/index');
         }
-=======
-        if($result > 0 ) {
-            gotoURL('操作成功','/admin/article/list/');
-            exit;
-        }
         exit;
->>>>>>> ccd86f27c8bc6d5fee623f785dfaec59dea54de4
     }
 
     /**
@@ -135,16 +104,11 @@ class ArticleController extends BasicController {
         } else {
             //执行删除操作
             $result = $this->m_article->deleteArticle($id);
-<<<<<<< HEAD
             if($result) {
                 javascriptRedirect('操作成功','/admin/article/index');
             } else {
                 javascriptRedirect('操作失败','/admin/article/index');
             }
-=======
-            gotoURL('操作成功','/admin/article/list/');
-            exit;
->>>>>>> ccd86f27c8bc6d5fee623f785dfaec59dea54de4
         }
     }
 }

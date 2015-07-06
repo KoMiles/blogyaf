@@ -8,29 +8,29 @@ class RouterPlugin extends Yaf_Plugin_Abstract {
 
     // 去掉 Module 后的 index
     public function routerShutdown(Yaf_Request_Abstract $request, Yaf_Response_Abstract $response) {
-    	//pr($request);
+        //pr($request);
 
         $modules = Yaf_Application::app()->getModules();
 
-    	$uri = $request->getRequestUri();
+        $uri = $request->getRequestUri();
 
-    	$uriInfo = explode('/', $uri);
+        $uriInfo = explode('/', $uri);
 
-    	$module     = ucfirst($uriInfo[1]);
-    	$controller = $uriInfo[2];
-    	$action     = $uriInfo[3];
+        $module     = ucfirst($uriInfo[1]);
+        $controller = $uriInfo[2];
+        $action     = $uriInfo[3];
 
-    	if(!in_array($module, $modules)){
+        if(!in_array($module, $modules)){
             $module = 'index';
             $controller = $uriInfo[1];
             $action     = $uriInfo[2];
-    	}
+        }
 
-    	$request->setModuleName(ucfirst($module));
+        $request->setModuleName(ucfirst($module));
 
-    	if(!$controller){
+        if(!$controller){
             $controller = 'index';
-    	}
+        }
 
         $request->setControllerName(ucfirst($controller));
 
@@ -40,7 +40,7 @@ class RouterPlugin extends Yaf_Plugin_Abstract {
 
         $request->setActionName($action);
 
-	   //pr($request);
+       //pr($request);
     }
 
 }

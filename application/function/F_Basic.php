@@ -153,7 +153,7 @@ function gotoURL($message = '', $URL = '') {
 
 
 function generatePageLink4($page, $totalPages, $URL, $counts, $query = '') {
-	$URL .= (strpos($URL, '?') === false ? '?' : '&');
+    $URL .= (strpos($URL, '?') === false ? '?' : '&');
     // First:
     $first = '首 页';
     $first = "<a href=".$URL."page=1$query>$first</a>";
@@ -189,8 +189,15 @@ function generatePageLink4($page, $totalPages, $URL, $counts, $query = '') {
  *  @Return: String pagenation navigator link
  */
 
-function generatePageLink($page, $totalPages, $URL, $counts, $query = '') {
-	$URL .= (strpos($URL, '?') === false ? '?' : '&');
+function generatePageLink($page, $pageSize, $counts, $URL,  $query = '') {
+
+    $page = $page >0 ? $page : 1;
+
+    //TotalPages
+    $totalPages = ceil($counts/$pageSize);
+    $page = $page > $totalPages ? $totalPages : $page;
+
+    $URL .= (strpos($URL, '?') === false ? '?' : '&');
     // First:
     $first = '首 页';
     $first = "<a href=".$URL."page=1$query>$first</a>";
@@ -220,10 +227,10 @@ function generatePageLink($page, $totalPages, $URL, $counts, $query = '') {
 
 // Functionality: 生成带"转至"第几页的分页导航栏
 function generatePageLink2($page, $totalPages, $URL, $counts, $query = '') {
-	$sign = '?';
-	if(strpos($URL, '?') !== FALSE){
-		$sign = '&';
-	}
+    $sign = '?';
+    if(strpos($URL, '?') !== FALSE){
+        $sign = '&';
+    }
 
     // First:
     $first = '首 页';
@@ -319,78 +326,78 @@ function calculateTime() {
  * @return type
  */
 function cutstr($string, $length, $dot = ' ...') {
-	if(strlen($string) <= $length) {
-		return $string;
-	}
+    if(strlen($string) <= $length) {
+        return $string;
+    }
 
-	$pre = chr(1);
-	$end = chr(1);
-	$string = str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'), array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), $string);
+    $pre = chr(1);
+    $end = chr(1);
+    $string = str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'), array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), $string);
 
-	$strcut = '';
-	if(strtolower(CHARSET) == 'utf-8') {
+    $strcut = '';
+    if(strtolower(CHARSET) == 'utf-8') {
 
-		$n = $tn = $noc = 0;
-		while($n < strlen($string)) {
+        $n = $tn = $noc = 0;
+        while($n < strlen($string)) {
 
-			$t = ord($string[$n]);
-			if($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
-				$tn = 1; $n++; $noc++;
-			} elseif(194 <= $t && $t <= 223) {
-				$tn = 2; $n += 2; $noc += 2;
-			} elseif(224 <= $t && $t <= 239) {
-				$tn = 3; $n += 3; $noc += 2;
-			} elseif(240 <= $t && $t <= 247) {
-				$tn = 4; $n += 4; $noc += 2;
-			} elseif(248 <= $t && $t <= 251) {
-				$tn = 5; $n += 5; $noc += 2;
-			} elseif($t == 252 || $t == 253) {
-				$tn = 6; $n += 6; $noc += 2;
-			} else {
-				$n++;
-			}
+            $t = ord($string[$n]);
+            if($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
+                $tn = 1; $n++; $noc++;
+            } elseif(194 <= $t && $t <= 223) {
+                $tn = 2; $n += 2; $noc += 2;
+            } elseif(224 <= $t && $t <= 239) {
+                $tn = 3; $n += 3; $noc += 2;
+            } elseif(240 <= $t && $t <= 247) {
+                $tn = 4; $n += 4; $noc += 2;
+            } elseif(248 <= $t && $t <= 251) {
+                $tn = 5; $n += 5; $noc += 2;
+            } elseif($t == 252 || $t == 253) {
+                $tn = 6; $n += 6; $noc += 2;
+            } else {
+                $n++;
+            }
 
-			if($noc >= $length) {
-				break;
-			}
+            if($noc >= $length) {
+                break;
+            }
 
-		}
-		if($noc > $length) {
-			$n -= $tn;
-		}
+        }
+        if($noc > $length) {
+            $n -= $tn;
+        }
 
-		$strcut = substr($string, 0, $n);
+        $strcut = substr($string, 0, $n);
 
-	} else {
-		$_length = $length - 1;
-		for($i = 0; $i < $length; $i++) {
-			if(ord($string[$i]) <= 127) {
-				$strcut .= $string[$i];
-			} else if($i < $_length) {
-				$strcut .= $string[$i].$string[++$i];
-			}
-		}
-	}
+    } else {
+        $_length = $length - 1;
+        for($i = 0; $i < $length; $i++) {
+            if(ord($string[$i]) <= 127) {
+                $strcut .= $string[$i];
+            } else if($i < $_length) {
+                $strcut .= $string[$i].$string[++$i];
+            }
+        }
+    }
 
-	$strcut = str_replace(array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
+    $strcut = str_replace(array($pre.'&'.$end, $pre.'"'.$end, $pre.'<'.$end, $pre.'>'.$end), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
 
-	$pos = strrpos($strcut, chr(1));
-	if($pos !== false) {
-		$strcut = substr($strcut,0,$pos);
-	}
-	return $strcut.$dot;
+    $pos = strrpos($strcut, chr(1));
+    if($pos !== false) {
+        $strcut = substr($strcut,0,$pos);
+    }
+    return $strcut.$dot;
 }
 
 
 function pr($arr) {
-	echo '<pre>';
+    echo '<pre>';
     print_r($arr);
-	echo '</pre>';
+    echo '</pre>';
 }
 
 
 function pp() {
-	pr($_POST);
+    pr($_POST);
 }
 
 
@@ -408,18 +415,18 @@ function jsAlert($msg) {
 function jsRedirect($url, $die = true) {
     echo "<script type='text/javascript'>window.location.href=\"$url\"</script>";
     if($die){
-    	die;
+        die;
     }
 }
 
 
 // verify page
 function verifyPage($page, $totalPages){
-	if ($page > $totalPages || !is_numeric($page) || $page <= 0) {
-		$page = 1;
-	}
-	
-	return $page;
+    if ($page > $totalPages || !is_numeric($page) || $page <= 0) {
+        $page = 1;
+    }
+    
+    return $page;
 }
 
 
@@ -427,7 +434,7 @@ function verifyPage($page, $totalPages){
  * Echo and die
  */
 function eand($msg){
-	echo $msg; die;
+    echo $msg; die;
 }
 
 
@@ -435,7 +442,7 @@ function eand($msg){
  * Echo html br
  */
 function br(){
-	echo '<br />';
+    echo '<br />';
 }
 
 
@@ -443,20 +450,20 @@ function br(){
  * Echo html hr
  */
 function hr(){
-	echo '<hr/>';
+    echo '<hr/>';
 }
 
 
 // echo hidden div with msg
 function echoHiddenDiv($msg){
-	$html = '<div style="display:none">'.$msg.'</div>';
-	echo $html;
+    $html = '<div style="display:none">'.$msg.'</div>';
+    echo $html;
 }
 
 
 // Highlight keyword
 function highlight($str, $find, $color){
-	return str_replace($find, '<font color="'.$color.'">'.$find.'</font>', $str);
+    return str_replace($find, '<font color="'.$color.'">'.$find.'</font>', $str);
 }
 
 /**

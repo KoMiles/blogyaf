@@ -43,7 +43,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         Yaf_Loader::import('Helper.class.php');
 
         Helper::import('Basic');
-        Helper::import('Pagination');
         Yaf_Loader::import('C_Basic.php');
     }
 
