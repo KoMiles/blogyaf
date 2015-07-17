@@ -21,16 +21,16 @@ class IndexController extends Yaf_Controller_Abstract {
         $site   =   Yaf_Application::app()->getConfig();
         $this->getView()->assign('content','welcome，The yaf is works！');
         $this->getView()->display('index.html');
-	exit;
+    exit;
         //查询当前使用的所有路由协议  
         //$routes = Yaf_Dispatcher::getInstance()->getRouter()->getRoutes();  
         //print_r($routes);  
         //echo "<hr/>";
         $re = $this->getModuleName();
-	$re = $this->getRequest()->getModuleName();
-	$re = $this->getRequest()->getActionName();
-	var_dump($re);
-	exit;
+    $re = $this->getRequest()->getModuleName();
+    $re = $this->getRequest()->getActionName();
+    var_dump($re);
+    exit;
         $site   =   Yaf_Application::app()->getConfig();
         $this->getView()->assign('content','hello world222~!');
         $this->getView()->display('index_1.html');

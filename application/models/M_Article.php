@@ -17,7 +17,7 @@ class M_Article extends M_Model {
     }
 
     // 查询文章列表
-    public function getArticlesList($page, $pageSize, $status){
+    public function getArticlesList($page, $pageSize, $status = 'normal'){
         $start = 0;
         if($page > 1) {
             $start = ($page-1) * $pageSize;
@@ -99,7 +99,14 @@ class M_Article extends M_Model {
         return $this->DeleteByID($id);
     }
 
-    public function getArticlesCount($status) {
+    /**
+     * getArticlesCount
+     * 文章记录数
+     * @param string $status
+     * @access public
+     * @return void
+     */
+    public function getArticlesCount($status = 'normal') {
         $this->Where(array('status' => $status));
         return $this->Total();
     }

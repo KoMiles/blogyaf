@@ -10,6 +10,14 @@ class BasicController extends Yaf_Controller_Abstract {
         }
     }
 
+    /**
+     * getPost 
+     * post提交数据
+     * @param mixed $key 
+     * @param mixed $filter 
+     * @access public
+     * @return void
+     */
     public function getPost($key, $filter = TRUE){
 
         if($filter){
@@ -19,6 +27,14 @@ class BasicController extends Yaf_Controller_Abstract {
         }
     }
 
+    /**
+     * getQuery 
+     * get提交数据
+     * @param mixed $key 
+     * @param mixed $filter 
+     * @access public
+     * @return void
+     */
     public function getQuery($key, $filter = TRUE){
         if($filter){
             return filterStr($this->getRequest()->getQuery($key));
@@ -27,6 +43,14 @@ class BasicController extends Yaf_Controller_Abstract {
         }
     }
 
+    /**
+     * getParam 
+     * 路由提交数据
+     * @param mixed $key 
+     * @param mixed $filter 
+     * @access public
+     * @return void
+     */
     public function getParam($key, $filter = TRUE){
         if($filter){
             return filterStr($this->getRequest()->getParam($key));

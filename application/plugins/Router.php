@@ -17,13 +17,13 @@ class RouterPlugin extends Yaf_Plugin_Abstract {
         $uriInfo = explode('/', $uri);
 
         $module     = ucfirst($uriInfo[1]);
-        $controller = $uriInfo[2];
-        $action     = $uriInfo[3];
+        $controller = isset($uriInfo[2]) ? $uriInfo[2] : '' ;
+        $action     = isset($uriInfo[3]) ? $uriInfo[3] : '' ;
 
         if(!in_array($module, $modules)){
             $module = 'index';
-            $controller = $uriInfo[1];
-            $action     = $uriInfo[2];
+            $controller = isset($uriInfo[2]) ? $uriInfo[2] : '' ;
+            $action     = isset($uriInfo[3]) ? $uriInfo[3] : '' ;
         }
 
         $request->setModuleName(ucfirst($module));

@@ -111,4 +111,21 @@ class ArticleController extends BasicController {
             }
         }
     }
+    /**
+     * detailAction 
+     * 
+     * @access public
+     * @return void
+     */
+    public function detailAction() {
+        $id = $this->getQuery('id');
+        if ($id <= 0) {
+            $error_msg = "参数错误！";
+        }
+
+        $article_info = $this ->m_article ->getArticleInfo($id);
+        $this->getView()->assign('article_info',$article_info);
+        $this->getView()->display('detail.html');
+        exit();
+    }
 }

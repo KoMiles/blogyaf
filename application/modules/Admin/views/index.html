@@ -7,7 +7,7 @@
     <tr>
         <td><?php echo $row['id'];?></td>
         <td><?php echo $row['author'];?></td>
-        <td><?php echo $row['title'];?></td>
+        <td><a href="/admin/article/detail?id=<?php echo $row['id']?>"><?php echo $row['title'];?></a></td>
         <td><?php echo $row['content'];?></td>
         <td><?php echo $row['statusCn'];?></td>
         <td><?php echo $row['date'];?></td>
