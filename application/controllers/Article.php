@@ -47,6 +47,7 @@ class ArticleController extends BasicController {
      * @return void
      */
     public function detailAction($id) {
+        
         echo "index article detail action";
         exit;
     }

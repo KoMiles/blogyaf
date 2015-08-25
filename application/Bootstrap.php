@@ -23,6 +23,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 
     // Load libaray, MySQL model, function
     public function _initCore() {
+        return true;
         define('TB_PREFIX',    '');
         //define('APP_NAME'   ,  'YOF-DEMO');
         define('LIB_PATH',     APP_PATH.'/application/library');
@@ -52,6 +53,11 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     public function _initRoute(Yaf_Dispatcher $dispatcher) {
         $router = Yaf_Dispatcher::getInstance()->getRouter();
         $router->addConfig(Yaf_Registry::get("config")->routes);
+        //创建一个路由协议实例
+        //$route = new Yaf_Route_Rewrite('product/:ident',array('module'=>'Index','controller' => 'Index','action' => 'test'));
+        //使用路由器装载路由协议
+        ///product/34
+        //$router->addRoute('product', $route);
     }
 
     /**
@@ -65,7 +71,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
         //$admin = new AdminPlugin();
         //$dispatcher->registerPlugin($admin);
         //Yaf_Registry::set('adminPlugin', $admin);
-}
+    }
 
 
     /**

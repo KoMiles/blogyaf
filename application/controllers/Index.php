@@ -18,8 +18,11 @@ class IndexController extends Yaf_Controller_Abstract {
      * 默认控制器
      */
     public function indexAction() {
+        $router = Yaf_Dispatcher::getInstance()->getRouter();
+        echo "<pre>";
+var_dump($router);exit;
         $site   =   Yaf_Application::app()->getConfig();
-        $this->getView()->assign('content','welcome，The yaf is works！');
+        $this->getView()->assign('content','welcome，The yaf ahsh is works！');
         $this->getView()->display('index.html');
         exit;
         //查询当前使用的所有路由协议  
@@ -64,6 +67,22 @@ class IndexController extends Yaf_Controller_Abstract {
     public function phpinfoAction() {
         phpinfo();
         exit;
+    }
+    public function viewAction() {
+        $str = YAF_VERSION;
+        $str = YAF_ENVIRON;
+        $str = YAF_ERR_STARTUP_FAILED;
+        $str = YAF_ERR_ROUTE_FAILED;
+        $str = YAF_ERR_NOTFOUND_MODULE;
+        echo "<pre>";
+        $str = get_defined_constants();
+        var_dump($str);exit;
+
+    }
+    public function testAction() {
+        echo "this is index module and index controller and test action";
+        exit;
+
     }
 }
 
