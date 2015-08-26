@@ -18,6 +18,9 @@ class IndexController extends Yaf_Controller_Abstract {
      * 默认控制器
      */
     public function indexAction() {
+    echo "<pre>";
+        $request = $this->getRequest();
+print_r($request);exit;
         $router = Yaf_Dispatcher::getInstance()->getRouter();
         echo "<pre>";
 var_dump($router);exit;

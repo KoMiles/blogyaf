@@ -65,8 +65,8 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
      * 插件的目录是在application_directory/plugins
      */
     public function _initPlugin(Yaf_Dispatcher $dispatcher) {
-        $router = new RouterPlugin();
-        $dispatcher->registerPlugin($router);
+        //$router = new RouterPlugin();
+        //$dispatcher->registerPlugin($router);
 
         //$admin = new AdminPlugin();
         //$dispatcher->registerPlugin($admin);
