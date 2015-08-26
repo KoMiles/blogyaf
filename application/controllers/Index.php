@@ -19,6 +19,7 @@ class IndexController extends Yaf_Controller_Abstract {
      */
     public function indexAction() {
         $site   =   Yaf_Application::app()->getConfig();
+        $re = $site->application->ext;
         $this->getView()->assign('content','welcome，The yaf is works！');
         $this->getView()->display('index.html');
         exit;

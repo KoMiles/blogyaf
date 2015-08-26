@@ -24,6 +24,7 @@ class ProductController extends Yaf_Controller_Abstract{
         exit;
     }
     public function infoAction() {
+        $re = $this->getRequest()->getParam('id');
         echo " product info action";
         exit;
     }

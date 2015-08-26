@@ -9,9 +9,9 @@
 
 class M_Default extends M_Model {
 
-	function __construct($table) {
-		$this->table = TB_PREFIX.$table;
-		parent::__construct();
-	}
+    function __construct($table) {
+        $this->table = TB_PREFIX.$table;
+        parent::__construct();
+    }
 
 }
