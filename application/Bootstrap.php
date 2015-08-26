@@ -51,13 +51,27 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
      * 添加配置中的路由
      */
     public function _initRoute(Yaf_Dispatcher $dispatcher) {
-        $router = Yaf_Dispatcher::getInstance()->getRouter();
-        $router->addConfig(Yaf_Registry::get("config")->routes);
+        //$router = Yaf_Dispatcher::getInstance()->getRouter();
+        //$router->addConfig(Yaf_Registry::get("config")->routes);
         //创建一个路由协议实例
         //$route = new Yaf_Route_Rewrite('product/:ident',array('module'=>'Index','controller' => 'Index','action' => 'test'));
         //使用路由器装载路由协议
         ///product/34
         //$router->addRoute('product', $route);
+        $router = Yaf_Dispatcher::getInstance()->getRouter();
+        $router->addConfig(Yaf_Registry::get("config")->routes);
+        /**
+         * 添加一个路由
+         */
+        $route  = new Yaf_Route_Rewrite(
+            "/product/list/:id/",
+            array(
+                "controller" => "product",
+                "action"         => "info",
+            )
+        );
+
+        $router->addRoute('dummy', $route);
     }
 
     /**
