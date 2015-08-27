@@ -1,12 +1,14 @@
 <?php
-/**
- * File: Helper.class.php
- * Functionality: Controller, library, function loader and raiseError
- * Author: Nic XIE
- * Date: 2013-5-8
- * ----------------- DO NOT MODIFY THIS FILE UNLESS YOU FULLY UNDERSTAND ! ------------------
- */
 
+/**
+ * Helper 
+ * 
+ * @abstract
+ * @package 
+ * @version $Id$
+ * @author wangkongming <komiles@163.com> 
+ * @date 2015-08-27 18:18:46
+ */
 abstract class Helper {
 
     private static $obj;

@@ -23,14 +23,10 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 
     // Load libaray, MySQL model, function
     public function _initCore() {
-        return true;
-        Yaf_Loader::import('M_Model.pdo.php');
-        Yaf_Loader::import('Helper.class.php');
-
-        Helper::import('Basic');
-        Yaf_Loader::import('C_Basic.php');
     }
     public function _initCommon() {
+        Yaf_Loader::import("/data/web_data/blogyaf/application/models/M_Article.php");
+        Yaf_Loader::import("/data/web_data/blogyaf/application/library/Db/DbPdo.php");
 
     }
 

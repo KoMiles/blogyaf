@@ -26,12 +26,10 @@ class StudyController extends Yaf_Controller_Abstract {
 
     }
     public function ArticleAction() {
-        $config = Yaf_Registry::get("config");
-        $database = $config ->database;
-        $master_ip = $database->master->server;
-        $slaves = $database->slaves->toArray();
-var_dump($slaves);
-//var_dump($database);
+        $model_article = new Model_Article();
+        $result = $model_article ->getArticle();
+        echo "<pre>";
+        var_dump($result);exit;
         echo "this is article action! ";
         exit;
     }

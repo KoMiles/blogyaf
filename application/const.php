@@ -1,4 +1,3 @@
 <?php
-date_default_timezone_set('Asia/Chongqing');
-define('CUR_DATE', date('Y-m-d'));
+define('FUNC_PATH',APP_PATH "/application/library/Function");
 
