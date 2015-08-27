@@ -155,5 +155,11 @@ class TestController extends    Yaf_Controller_Abstract {
         var_dump($routes);
         echo 1111;
     }
+    public function pdoAction() {
+        echo "this is pdo test";
+        exit;
+
+    }
+    
 
 }

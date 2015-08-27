@@ -24,27 +24,14 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     // Load libaray, MySQL model, function
     public function _initCore() {
         return true;
-        define('TB_PREFIX',    '');
-        //define('APP_NAME'   ,  'YOF-DEMO');
-        define('LIB_PATH',     APP_PATH.'/application/library');
-        define('MODEL_PATH',   APP_PATH.'/application/models');
-        define('FUNC_PATH',    APP_PATH.'/application/function');
-        define('ADMIN_PATH',   APP_PATH.'/application/modules/Admin');
-
-        // CSS, JS, IMG PATH
-        define('CSS_PATH', '/css');
-        define('JS_PATH',  '/js');
-        define('IMG_PATH',  '/img');
-
-        // Admin CSS, JS PATH
-        define('ADMIN_CSS_PATH', '/admin/css');
-        define('ADMIN_JS_PATH',  '/admin/js');
-
         Yaf_Loader::import('M_Model.pdo.php');
         Yaf_Loader::import('Helper.class.php');
 
         Helper::import('Basic');
         Yaf_Loader::import('C_Basic.php');
+    }
+    public function _initCommon() {
+
     }
 
     /**
