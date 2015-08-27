@@ -14,6 +14,7 @@ class DbPdo {
      * @return void
      */
     public function __construct($host, $username, $password, $db) {
+        
         $this->pdo = new PDO("mysql:host＝{$host};dbname={$db}","{$username}","{$db}");
     }
 
@@ -42,7 +43,6 @@ class DbPdo {
     public function getAll($sql) {
         $result = $this->pdo->query($sql);
         return $result;
-
     }
     /**
      * __destruct 
