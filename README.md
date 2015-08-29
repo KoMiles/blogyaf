@@ -30,5 +30,11 @@ service php5-fpm restart
 ```
 php-cgi -b 127.0.0.1:9000
 ```
+- nginx 配置请求重定向到index.php入口文件
+```
+if (!-e $request_filename) {
+    rewrite ^/(.*)  /index.php/$1 last;
+  }
+```
 
 
