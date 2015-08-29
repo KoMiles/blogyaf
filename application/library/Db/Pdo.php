@@ -1,6 +1,5 @@
 <?php
-namespace Db;
-class DbPdo {
+class Db_Pdo {
     //mysql　句柄
     private $pdo = null;
     
@@ -16,11 +15,13 @@ class DbPdo {
      */
     public function __construct() {
         $master = Yaf_Registry::get("config")->database->master->toArray();
-        $this->$pdo = new PDO("mysql:host＝{$master['server']};dbname={$master['database']}","{$master['user']}","{$master['password']}");
+        $this->pdo = new PDO("mysql:host={$master['server']};dbname={$master['database']}","{$master['user']}","{$master['password']}");
+        $this->pdo -> exec('set names utf8');
     }
 
     public function getRow($sql) {
-        $result = $this->$pdo->query($sql);
+        $stmt = $this->pdo->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
     /**
@@ -31,7 +32,7 @@ class DbPdo {
      * @return void
      */
     public function getAffectNum($sql) {
-        $result = $this->$pdo->exec($sql);
+        $result = $this->pdo->exec($sql);
         return $result;
     }
     /**
@@ -42,7 +43,7 @@ class DbPdo {
      * @return void
      */
     public function getAll($sql) {
-        $result = $this->$pdo->query($sql);
+        $result = $this->pdo->query($sql);
         return $result;
     }
     /**
@@ -52,7 +53,6 @@ class DbPdo {
      * @return void
      */
     public function __destruct() {
-        mysql_close($this->conn);
     }
 
 
