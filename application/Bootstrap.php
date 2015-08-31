@@ -27,7 +27,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     public function _initCommon() {
     //    Yaf_Loader::import("/data/web_data/blogyaf/application/models/M_Article.php");
      //   Yaf_Loader::import("/data/web_data/blogyaf/application/library/Db/DbPdo.php");
-
     }
 
     /**
