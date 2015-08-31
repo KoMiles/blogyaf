@@ -1,7 +1,7 @@
 <?php
 /**
  * Db_Pdo 
- * 
+ * Pdo基类
  * @package 
  * @version $Id$
  * @author wangkongming <komiles@163.com> 
@@ -23,6 +23,7 @@ class Db_Pdo {
 
     // SQL log file: Log SQL error for debug if NOT under DEV
     private $logFile = '';
+    private static $debug = false;
 
     /**
      * __construct 
@@ -62,9 +63,9 @@ class Db_Pdo {
 
         try{
             if(!isset(self::$conn)) {
-                self::$conn = new PDO($dsn, $user, $pswd);
+                self::$conn = new PDO($dsn, $user, $pwd);
                 self::$conn->query('SET NAMES utf8');
-                unset($db, $driver, $host, $port, $user, $pswd, $dsn);
+                unset($db, $driver, $host, $port, $user, $pwd, $dsn);
             }
         }catch(PDOException $e){
                 file_put_contents($this->logFile, $e->getMessage().PHP_EOL, FILE_APPEND);
@@ -423,8 +424,22 @@ class Db_Pdo {
      * @return result of execution
      */
     final private function Execute() {
+        if(self::$debug) {
+            echo "<br/>".$this->sql."\n<br/>";
+        }
         $this->result = self::$conn->query($this->sql);
         $this->checkResult();
+    }
+    /**
+     * debug 
+     * 调试debug
+     * @param mixed $flag 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function debug($flag = false) {
+        self::$debug = $flag;
     }
 
 

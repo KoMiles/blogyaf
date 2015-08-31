@@ -1,5 +1,5 @@
 <?php
-class Function_String {
+class Tool_String {
     public static function getRandom($length = 4, $type = 1) {
         switch ($type) {
         case 1:
