@@ -21,7 +21,7 @@ class IndexController extends Yaf_Controller_Abstract {
         $site   =   Yaf_Application::app()->getConfig();
         $re = $site->application->ext;
         $this->getView()->assign('content','welcome，The yaf is works！');
-        $this->getView()->display('index.html');
+        $this->getView()->display('./index/index.html');
         exit;
         //查询当前使用的所有路由协议  
         //$routes = Yaf_Dispatcher::getInstance()->getRouter()->getRoutes();  

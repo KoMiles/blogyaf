@@ -8,13 +8,13 @@
  * @author wangkongming <komiles@163.com> 
  * @date 2015-06-09 10:23:41
  */
-class ArticleController extends BasicController {
+class ArticleController extends Yaf_Controller_Abstract {
     private $m_article;
 
     private function init(){
         //Yaf_Registry::get('adminPlugin')->checkLogin();
 
-        $this->m_article = $this->load('Article');
+        $this->m_article = new ArticleModel();
         $this->homeUrl = '/admin/article';
     }
 
@@ -25,19 +25,23 @@ class ArticleController extends BasicController {
      * @return void
      */
     public function indexAction() {
-        $pageSize = 8;
-        $page = $this->getQuery("page") ? $this->getQuery("page") : 1;
-        $article_list = $this->m_article->getArticlesList($page, $pageSize);
+        $pageSize = 10;
+        $page = $this->getRequest()->getQuery("page") ? $this->getRequest()->getQuery("page") : 1;
+        //$page = $this->getRequest()->getParam("page") ? $this->getRequest()->getParam("page") : 1;
+        $article_list = $this->m_article->getArticlesList($page, $pageSize, 'normal');
         foreach ($article_list as $key => $row) {
             $article_list[$key]['date'] = date('Y-m-d H:i:s',$row['create_ts']);
             $article_list[$key]['statusCn'] = $row['status'] == 'normal' ? '正常' : '已删除';
         }
-        $total_num = $this->m_article -> getArticlesCount();
+        $total_num = $this->m_article -> getArticleTotal('normal');
 
-        $page_string = generatePageLink($page, $pageSize, $total_num, "/admin/article/index");
-        echo $page_string;
+        $pageObj = new Tool_Pagination();
+        $page_html = $pageObj->markPhpPager('?page={page}',$page,$pageSize,$total_num);
+        //$page_html = $pageObj->markPhpPager('{page}',$page,$pageSize,$total_num);
 
-        $this->getView()->assign('page_string', $page_string);
+        $title = "文章列表";
+        $this->getView()->assign('page_string', $page_html);
+        $this->getView()->assign('title', $title);
         $this->getView()->assign('article_list', $article_list);
         $this->getView()->display('index.html');
         exit;
