@@ -14,7 +14,7 @@ class ArticleModel extends Db_Pdo {
     public function __construct() {
         parent::__construct();
         $this->table = "Article";
-        self::debug(true);
+        self::debug(false);
     }
 
     /**
@@ -42,6 +42,7 @@ class ArticleModel extends Db_Pdo {
         $limit = " {$start} , {$pageSize} ";
         return $this  -> Where($where)-> Limit($limit) ->  Order($order)-> Select();
     }
+
     /**
      * getArticleTotal 
      * 文章总条数
@@ -57,6 +58,21 @@ class ArticleModel extends Db_Pdo {
         }
 
         return $this  -> Where($where)-> Total();
+    }
+    /**
+     * getArticleInfo
+     * 获取单个文章的信息
+     * @param mixed $id 
+     * @access public
+     * @return void
+     */
+    public function getArticleInfo($id) {
+        if($id <= 0 ) {
+            return false;
+        }
+        $where = array('id' => $id);
+
+        return $this  -> Where($where)-> SelectOne();
     }
 }
 

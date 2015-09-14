@@ -160,6 +160,11 @@ class TestController extends    Yaf_Controller_Abstract {
         exit;
 
     }
+    public function routeAction() {
+        echo "test";
+        echo "detail action ";
+        echo "route is :" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
+    }
     
 
 }

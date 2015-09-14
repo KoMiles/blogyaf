@@ -33,30 +33,38 @@ class ArticleController extends Yaf_Controller_Abstract{
 
         $pageObj = new Tool_Pagination();
         $page_html = $pageObj->markPhpPager('?page={page}',$page,$pageSize,$total_num);
+        //$page_html = $pageObj->markPhpPager('{page}',$page,$pageSize,$total_num);
 
         $title = "文章列表";
         $this->getView()->assign('page_string', $page_html);
         $this->getView()->assign('title', $title);
         $this->getView()->assign('data_list', $article_list);
-        $this->getView()->display('./index.html');
+        $this->getView()->display('./article/index.html');
+        exit;
     }
 
     /**
      * detailAction 
-     * 
+     * 文章详情页面
      * @param mixed $id 
      * @access public
      * @return void
      */
-    public function detailAction($id) {
-        
-        echo "index article detail action";
+    public function detailAction() {
+        $id = $this->getRequest()->getParam("id") ? $this->getRequest()->getParam("id") : 1;
+        $article_info = $this -> m_article -> getArticleInfo($id);
+        $error_message = "";
+        if($article_info) {
+            $title = "文章详情";
+            $article_info['date'] = date('Y-m-d H:i:s',$article_info['update_ts']);
+            $this->getView()->assign('title', $title);
+            $this->getView()->assign('data_info', $article_info);
+        } else {
+            $error_message = "文章不存在！";
+        }
+        $this->getView()->assign('error_msg', $error_message);
+        $this->getView()->display('./article/detail.html');
         exit;
-    }
-    public function routeAction() {
-        echo "test";
-        echo "detail action ";
-        echo "route is :" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
     }
 
 }

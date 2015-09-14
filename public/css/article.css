@@ -1,0 +1,37 @@
+.pager_info_box {
+    width: 120px;
+    font-size: 14px;
+    float: left;
+}
+.pager_num_box {
+    float: right;
+}
+.pager_num_box a {
+
+    display: block;
+    float: left;
+    border: 1px solid #cdcdcd;
+    padding: 0 7px;
+    margin: 0 3px;
+    color: #333;
+    line-height: 18px;
+}
+.pager_num_box span {
+    display: block;
+    float: left;
+    border: 1px solid #cdcdcd;
+    padding: 0 7px;
+    margin: 0 3px;
+    color: #333;
+    line-height: 18px;
+}
+a.now:hover {
+    background: #06c;
+    color: #fff;
+}
+a {
+    color: #022f74;
+}
+.pager {
+    width:700px;
+}
