@@ -74,5 +74,60 @@ class ArticleModel extends Db_Pdo {
 
         return $this  -> Where($where)-> SelectOne();
     }
+    /**
+     * addArticle 
+     * 添加文章
+     * @param mixed $title 
+     * @param mixed $author 
+     * @param mixed $content 
+     * @access public
+     * @return void
+     */
+    public function addArticle($title, $author, $content){
+        $add_data = array(
+            'title' => $title,
+            'author' => $author,
+            'content' => $content,
+            'update_ts' => time(),
+            'create_ts' => time(),
+        );
+        return $this -> insert($add_data);
+    }
+    /**
+     * updateArticle 
+     * 修改文章
+     * @param mixed $id 
+     * @param mixed $title 
+     * @param mixed $author 
+     * @param mixed $content 
+     * @access public
+     * @return void
+     */
+    public function updateArticle($id, $title, $author, $content){
+        if($id <= 0) {
+            return false;
+
+        }
+        $update_data = array(
+            'title' => $title,
+            'author' => $author,
+            'content' => $content,
+            'update_ts' => time(),
+        );
+        return $this->UpdateByID($update_data,$id);
+    }
+    /**
+     * deleteArticle 
+     * 删除文章
+     * @param mixed $id 
+     * @access public
+     * @return void
+     */
+    public function deleteArticle($id) {
+        if($id <=0 ) {
+            return false;
+        }
+        return $this->DeleteByID($id);
+    }
 }
 

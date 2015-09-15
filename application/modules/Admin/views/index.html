@@ -7,11 +7,11 @@
     <tr>
         <td><?php echo $row['id'];?></td>
         <td><?php echo $row['author'];?></td>
-        <td><a href="/admin/article/detail?id=<?php echo $row['id']?>"><?php echo $row['title'];?></a></td>
+        <td><a href="/article/detail/id/<?php echo $row['id']?>"><?php echo $row['title'];?></a></td>
         <td><?php echo $row['content'];?></td>
         <td><?php echo $row['statusCn'];?></td>
         <td><?php echo $row['date'];?></td>
-        <td><a href="/admin/article/view/edit/<?php echo $row['id']?>/">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/article/view/delete/<?php echo $row['id']?>">删除</a></td>
+        <td><a href="/admin/article/view/op/edit/id/<?php echo $row['id']?>/">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/article/view/op/delete/id/<?php echo $row['id']?>">删除</a></td>
     </tr>
     <?php }?>
 </table>

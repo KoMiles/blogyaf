@@ -42,6 +42,7 @@ class ArticleController extends Yaf_Controller_Abstract {
         $title = "文章列表";
         $this->getView()->assign('page_string', $page_html);
         $this->getView()->assign('title', $title);
+        $this->getView()->assign('user_ip', Tool_String::getRealIP());
         $this->getView()->assign('article_list', $article_list);
         $this->getView()->display('index.html');
         exit;
@@ -54,22 +55,22 @@ class ArticleController extends Yaf_Controller_Abstract {
      */
     public function modifyAction() {
         //post方式获取参数
-        $type = $this->getPost('type') ;
-        $title = $this->getPost('title') ;
-        $author = $this->getPost('author') ;
-        $content = $this->getPost('content') ;
+        $type = $this -> getRequest() -> getPost('type') ;
+        $title = $this-> getRequest() -> getPost('title') ;
+        $author = $this->getRequest() -> getPost('author') ;
+        $content = $this->getRequest() -> getPost('content') ;
         if($type == 'add') {
             //添加文章
             $result = $this->m_article->addArticle($title, $author, $content);
         } else if($type == 'edit') {
-            $id = $this->getPost('id') ;
+            $id = $this-> getRequest() -> getPost('id') ;
             //编辑文章
             $result = $this->m_article->updateArticle($id,$title, $author, $content);
         }
         if($result) {
-            javascriptRedirect('操作成功','/admin/article/index');
+            Tool_Redirect::javascriptRedirect('操作成功','/admin/article/index');
         } else {
-            javascriptRedirect('操作失败','/admin/article/index');
+            Tool_Redirect::javascriptRedirect('操作失败','/admin/article/index');
         }
         exit;
     }
@@ -82,9 +83,9 @@ class ArticleController extends Yaf_Controller_Abstract {
      */
     public function viewAction() {
         //获取参数
-        $op = $this  ->getRequest() ->  getParam('op');
-       // $id = $this -> getRequest() ->  getParam('id');
-        $id = $this  ->  getParam('id');
+        $op = $this  ->getRequest() ->  getParam('op') ? $this -> getRequest() -> getParam('op') : 'add';
+        $id = $this -> getRequest() ->  getParam('id') ? $this -> getRequest() ->  getParam('id') : 0 ;
+
         switch($op) {
             case  'add':
                 $view = 'add';
@@ -109,27 +110,12 @@ class ArticleController extends Yaf_Controller_Abstract {
             //执行删除操作
             $result = $this->m_article->deleteArticle($id);
             if($result) {
-                javascriptRedirect('操作成功','/admin/article/index');
+                Tool_Redirect::javascriptRedirect('操作成功','/admin/article/index');
             } else {
-                javascriptRedirect('操作失败','/admin/article/index');
+                Tool_Redirect:: javascriptRedirect('操作失败','/admin/article/index');
             }
         }
+        exit;
     }
-    /**
-     * detailAction 
-     * 
-     * @access public
-     * @return void
-     */
-    public function detailAction() {
-        $id = $this->getQuery('id');
-        if ($id <= 0) {
-            $error_msg = "参数错误！";
-        }
 
-        $article_info = $this ->m_article ->getArticleInfo($id);
-        $this->getView()->assign('article_info',$article_info);
-        $this->getView()->display('detail.html');
-        exit();
-    }
 }
