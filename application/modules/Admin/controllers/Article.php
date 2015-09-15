@@ -16,6 +16,7 @@ class ArticleController extends Yaf_Controller_Abstract {
 
         $this->m_article = new ArticleModel();
         $this->homeUrl = '/admin/article';
+        $this->getView()->assign('user_ip', Tool_String::getRealIP());
     }
 
     /**
@@ -42,7 +43,6 @@ class ArticleController extends Yaf_Controller_Abstract {
         $title = "文章列表";
         $this->getView()->assign('page_string', $page_html);
         $this->getView()->assign('title', $title);
-        $this->getView()->assign('user_ip', Tool_String::getRealIP());
         $this->getView()->assign('article_list', $article_list);
         $this->getView()->display('index.html');
         exit;
