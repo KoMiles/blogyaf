@@ -70,4 +70,45 @@ class Tool_String {
         }
         return ($ip ? $ip : $_SERVER['REMOTE_ADDR']);
     }
+    /**
+     * 生成ajax响应信息
+     * @param boolean $status 执行状态
+     * @param array   $data   返回的数据
+     * @param string  $error  错误信息
+     * @param array   $pager  分页相关参数
+     * @return string
+     */
+    public static function jsonView($status, $data = array(), $error = "", array $pager = array(), $append = array())
+    {
+        $data = array(
+            'status' => $status,
+            'data' => $data,
+            'message' => $error
+        );
+        if (!empty($pager)) {
+            $data['pager'] = $pager;
+        }
+        if (!empty($append)) {
+            $data['append'] = $append;
+        }
+        return json_encode($data);
+    }
+    /**
+     * jsonData 
+     * 输出json数据
+     * @param mixed $status 
+     * @param mixed $data 
+     * @param mixed $message 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function jsonData($status, $data, $message = '') {
+        $data = array(
+            'status' => $status,
+            'data' => $data,
+            'message' => $message
+        );
+        return json_encode($data);
+    }
 }

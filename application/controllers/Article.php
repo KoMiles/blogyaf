@@ -33,7 +33,6 @@ class ArticleController extends Yaf_Controller_Abstract{
 
         $pageObj = new Tool_Pagination();
         $page_html = $pageObj->markPhpPager('?page={page}',$page,$pageSize,$total_num);
-        //$page_html = $pageObj->markPhpPager('{page}',$page,$pageSize,$total_num);
 
         $title = "文章列表";
         $this->getView()->assign('page_string', $page_html);
