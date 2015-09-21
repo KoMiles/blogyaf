@@ -1,4 +1,12 @@
 <?php
+/**
+ * Tool_Json 
+ * json输出流
+ * @package 
+ * @version $Id$
+ * @author wangkongming <komiles@163.com> 
+ * @date 2015-09-21 19:21:14
+ */
 class Tool_Json {
     /**
      * 生成ajax响应信息
