@@ -9,6 +9,9 @@
 <textarea rows="3" cols="20" name="content">
 <?php echo $article_info['content']?>
 </textarea>
+<br/>
+<input type="radio" name="status" value="normal" <?php if($article_info['status'] == "normal"){echo "checked";}?> > 正常
+<input type="radio" name="status" value="checking" <?php if($article_info['status'] == "checking"){echo "checked";}?>> 审核中
     <input type="submit" value="修改">
     <input type="hidden" value="edit" name="type" />
 </form>

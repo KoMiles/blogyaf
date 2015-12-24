@@ -103,7 +103,7 @@ class ArticleModel extends Db_Pdo {
      * @access public
      * @return void
      */
-    public function updateArticle($id, $title, $author, $content){
+    public function updateArticle($id, $title, $author, $content,$status){
         if($id <= 0) {
             return false;
 
@@ -112,6 +112,7 @@ class ArticleModel extends Db_Pdo {
             'title' => $title,
             'author' => $author,
             'content' => $content,
+            'status' => $status,
             'update_ts' => time(),
         );
         return $this->UpdateByID($update_data,$id);

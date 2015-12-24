@@ -13,7 +13,6 @@ class ArticleController extends Yaf_Controller_Abstract {
 
     private function init(){
         //Yaf_Registry::get('adminPlugin')->checkLogin();
-
         $this->m_article = new ArticleModel();
         $this->homeUrl = '/admin/article';
         $this->getView()->assign('user_ip', Tool_String::getRealIP());
@@ -29,10 +28,10 @@ class ArticleController extends Yaf_Controller_Abstract {
         $pageSize = 10;
         $page = $this->getRequest()->getQuery("page") ? $this->getRequest()->getQuery("page") : 1;
         //$page = $this->getRequest()->getParam("page") ? $this->getRequest()->getParam("page") : 1;
-        $article_list = $this->m_article->getArticlesList($page, $pageSize, 'normal');
+        $article_list = $this->m_article->getArticlesList($page, $pageSize);
         foreach ($article_list as $key => $row) {
             $article_list[$key]['date'] = date('Y-m-d H:i:s',$row['create_ts']);
-            $article_list[$key]['statusCn'] = $row['status'] == 'normal' ? '正常' : '已删除';
+            $article_list[$key]['statusCn'] = $row['status'] == 'normal' ? '正常' : '审核中';
         }
         $total_num = $this->m_article -> getArticleTotal('normal');
 
@@ -65,7 +64,7 @@ class ArticleController extends Yaf_Controller_Abstract {
         } else if($type == 'edit') {
             $id = $this-> getRequest() -> getPost('id') ;
             //编辑文章
-            $result = $this->m_article->updateArticle($id,$title, $author, $content);
+            $result = $this->m_article->updateArticle($id,$title, $author, $content, $status);
         }
         if($result) {
             Tool_Redirect::javascriptRedirect('操作成功','/admin/article/index');
