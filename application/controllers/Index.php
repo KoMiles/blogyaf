@@ -10,21 +10,21 @@
 #      History: 2014-12-14
 =============================================================================*/
 
-class IndexController extends Yaf_Controller_Abstract {
+class IndexController extends Yaf\Controller_Abstract {
     public function init() {
-        Yaf_Dispatcher::getInstance()->disableView();
+        Yaf\Dispatcher::getInstance()->disableView();
     }
     /**
      * 默认控制器
      */
     public function indexAction() {
-        $site   =   Yaf_Application::app()->getConfig();
+        $site   =   Yaf\Application::app()->getConfig();
         $re = $site->application->ext;
         $this->getView()->assign('content','welcome，The yaf is works！');
         $this->getView()->display('./index/index.html');
         exit;
         //查询当前使用的所有路由协议  
-        //$routes = Yaf_Dispatcher::getInstance()->getRouter()->getRoutes();  
+        //$routes = Yaf\Dispatcher::getInstance()->getRouter()->getRoutes();  
         //print_r($routes);  
         //echo "<hr/>";
         $re = $this->getModuleName();
@@ -32,7 +32,7 @@ class IndexController extends Yaf_Controller_Abstract {
         $re = $this->getRequest()->getActionName();
         var_dump($re);
         exit;
-        $site   =   Yaf_Application::app()->getConfig();
+        $site   =   Yaf\Application::app()->getConfig();
         $this->getView()->assign('content','hello world222~!');
         $this->getView()->display('index_1.html');
     }

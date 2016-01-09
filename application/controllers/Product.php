@@ -1,6 +1,6 @@
 <?php
 //class ProductController extends BasicController{
-class ProductController extends Yaf_Controller_Abstract{
+class ProductController extends Yaf\Controller_Abstract{
     /**
      * indexAction 
      * @access public
@@ -18,13 +18,14 @@ class ProductController extends Yaf_Controller_Abstract{
      * @return void
      */
     public function detailAction() {
-        $id = $this ->  getParam('id');
+        $id = $this->getRequest()->getParam('id');
         var_dump($id);
         echo " product detail action";
         exit;
     }
     public function infoAction() {
-        $re = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('id');
+        var_dump($id);
         echo " product info action";
         exit;
     }
