@@ -8,7 +8,7 @@
  * @version $Id$
  * @author wangkongming <komiles@163.com> 
  */
-class ErrorController extends Yaf\Controller_Abstract {
+class ErrorController extends Yaf_Controller_Abstract {
 
     public function errorAction($exception) {
         $message = $exception->__toString();

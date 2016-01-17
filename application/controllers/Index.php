@@ -10,15 +10,15 @@
 #      History: 2014-12-14
 =============================================================================*/
 
-class IndexController extends Yaf\Controller_Abstract {
+class IndexController extends Yaf_Controller_Abstract {
     public function init() {
-        Yaf\Dispatcher::getInstance()->disableView();
+        Yaf_Dispatcher::getInstance()->disableView();
     }
     /**
      * 默认控制器
      */
     public function indexAction() {
-        $site   =   Yaf\Application::app()->getConfig();
+        $site   =   Yaf_Application::app()->getConfig();
         $re = $site->application->ext;
         $this->getView()->assign('content','welcome，The yaf is works！');
         $this->getView()->display('./index/index.html');
@@ -32,7 +32,7 @@ class IndexController extends Yaf\Controller_Abstract {
         $re = $this->getRequest()->getActionName();
         var_dump($re);
         exit;
-        $site   =   Yaf\Application::app()->getConfig();
+        $site   =   Yaf_Application::app()->getConfig();
         $this->getView()->assign('content','hello world222~!');
         $this->getView()->display('index_1.html');
     }

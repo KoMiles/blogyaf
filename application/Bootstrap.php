@@ -16,24 +16,24 @@
 //use Yaf\Bootstrap_Abstract;
 
 
-class Bootstrap extends Yaf\Bootstrap_Abstract {
+class Bootstrap extends Yaf_Bootstrap_Abstract {
 
     public function _initConfig() {
-        $config = Yaf\Application::app()->getConfig();
-        Yaf\Registry::set("config", $config);
+        $config = Yaf_Application::app()->getConfig();
+        Yaf_Registry::set("config", $config);
     }
 
     // Load libaray, MySQL model, function
     public function _initCore() {
     }
     public function _initConst() {
-       Yaf\Loader::import(APP_PATH."/application/const.php");
+       Yaf_Loader::import(APP_PATH."/application/const.php");
     }
 
     /**
      * 添加配置中的路由
      */
-    public function _initRoute(Yaf\Dispatcher $dispatcher) {
+    public function _initRoute(Yaf_Dispatcher $dispatcher) {
         //$router = Yaf\Dispatcher::getInstance()->getRouter();
         //$router->addConfig(Yaf\Registry::get("config")->routes);
         //创建一个路由协议实例
@@ -41,12 +41,12 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
         //使用路由器装载路由协议
         ///product/34
         //$router->addRoute('product', $route);
-        $router = Yaf\Dispatcher::getInstance()->getRouter();
-        $router->addConfig(Yaf\Registry::get("config")->routes);
+        $router = Yaf_Dispatcher::getInstance()->getRouter();
+        $router->addConfig(Yaf_Registry::get("config")->routes);
         /**
          * 添加一个路由
          */
-        $route  = new Yaf\Route\Rewrite(
+        $route  = new Yaf_Route_Rewrite(
             "/product/list/:id/",
             array(
                 "controller" => "product",
@@ -61,7 +61,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
      * 注册一个插件
      * 插件的目录是在application_directory/plugins
      */
-    public function _initPlugin(Yaf\Dispatcher $dispatcher) {
+    public function _initPlugin(Yaf_Dispatcher $dispatcher) {
         //$router = new RouterPlugin();
         //$dispatcher->registerPlugin($router);
 
@@ -74,7 +74,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
     /**
      * 自定义视图引擎
      */
-    public function _initSmarty(Yaf\Dispatcher $dispatcher) {
+    public function _initSmarty(Yaf_Dispatcher $dispatcher) {
         //$smarty = new Smarty_Adapter(null, Yaf\Registry::get("config")->get("smarty"));
         //Yaf\Dispatcher::getInstance()->setView($smarty);
     }
