@@ -185,5 +185,124 @@ class RedisController extends Yaf_Controller_Abstract{
         $this->getView()->display('./redis/message.html');
         exit;
     }
+
+    /**
+     * getMultipleAction 
+     * 获取所有指定键的值
+     * @access public
+     * @return void
+     */
+    public function getMultipleAction() {
+        $key = array("test1_komiles","test3_komiles");
+        $result = $this -> redis -> getMultiple($key);
+        $message = "对应的值为";
+        var_dump($result);
+        $this->getView()->assign("title",$this->title);
+        $this->getView()->assign("message",$message);
+        $this->getView()->display('./redis/message.html');
+        exit;
+    }
+
+
+    /**
+     * lpushAction 
+     * 由列表头部添加字符串值。如果不存在该键则创建该列表。如果该键存在，而且不是一个列表，返回FALSE
+     * @access public
+     * @return void
+     */
+    public function lpushAction() {
+        $key = "test4_komiles";
+        $result = $this -> redis -> lpush($key,"1111");
+        var_dump($result);
+        $result = $this -> redis -> lpush($key,"222");
+        var_dump($result);
+        $this->getView()->assign("title",$this->title);
+        $this->getView()->assign("message",$message);
+        $this->getView()->display('./redis/message.html');
+        exit;
+    }
+
+    /**
+     * rpushAction 
+     * 由列表尾部添加字符串值。如果不存在该键则创建该列表。如果该键存在，而且不是一个列表，返回FALSE。
+     * @access public
+     * @return void
+     */
+    public function rpushAction() {
+        $key = "test5_komiles";
+        $result = $this -> redis -> lpush($key,"1111");
+        var_dump($result);
+        $result = $this -> redis -> lpush($key,"222");
+        var_dump($result);
+        $this->getView()->assign("title",$this->title);
+        $this->getView()->assign("message",$message);
+        $this->getView()->display('./redis/message.html');
+        exit;
+    }
+
+    /**
+     * lpopAction 
+     * 移除列表的第一个元素,下面的例子返回4444
+     * @access public
+     * @return void
+     */
+    public function lpopAction() {
+        $key = "test6_komiles";
+        $this -> redis -> delete($key);
+        $this -> redis -> lpush($key,"1111");
+        $this -> redis -> lpush($key,"222");
+        $this -> redis -> lpush($key,"3333");
+        $this -> redis -> lpush($key,"4444");
+        $result = $this -> redis -> lpop($key);
+        var_dump($result);
+
+        $this->getView()->assign("title",$this->title);
+        $this->getView()->assign("message",$message);
+        $this->getView()->display('./redis/message.html');
+        exit;
+    }
+
+    /**
+     * rpopAction 
+     * 移除列表的最后一个元素,下面的例子返回1111
+     * @access public
+     * @return void
+     */
+    public function rpopAction() {
+        $key = "test6_komiles";
+        $this -> redis -> delete($key);
+        $this -> redis -> lpush($key,"1111");
+        $this -> redis -> lpush($key,"222");
+        $this -> redis -> lpush($key,"3333");
+        $this -> redis -> lpush($key,"4444");
+        $result = $this -> redis -> rpop($key);
+        var_dump($result);
+
+        $this->getView()->assign("title",$this->title);
+        $this->getView()->assign("message",$message);
+        $this->getView()->display('./redis/message.html');
+        exit;
+    }
+
+    /**
+     * llenAction 
+     * 返回列表的长度，如果键不存在，返回0
+     * @access public
+     * @return void
+     */
+    public function llenAction() {
+        $key = "test6_komiles";
+        $result = $this -> redis -> llen($key);
+        var_dump($result);
+        $result = $this -> redis -> lsize($key);
+        var_dump($result);
+
+        $this->getView()->assign("title",$this->title);
+        $this->getView()->assign("message",$message);
+        $this->getView()->display('./redis/message.html');
+        exit;
+    }
+
+
 }
 
