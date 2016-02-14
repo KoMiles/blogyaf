@@ -1,7 +1,7 @@
 <?php
 /**
  * ErrorController 
- * 
+ * 异常输出
  * @uses Yaf
  * @uses _Controller_Abstract
  * @package 

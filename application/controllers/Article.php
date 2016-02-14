@@ -2,6 +2,7 @@
 /**
  * ArticleController 
  * 文章相关的页面
+ * URL:/index/article/index/
  * @uses BasicController
  * @package 
  * @version $Id$
@@ -45,6 +46,7 @@ class ArticleController extends Yaf_Controller_Abstract{
     /**
      * detailAction 
      * 文章详情页面
+     * URL:/article/detail/id/44/
      * @param mixed $id 
      * @access public
      * @return void
