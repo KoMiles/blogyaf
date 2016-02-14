@@ -211,6 +211,7 @@ class RedisController extends Yaf_Controller_Abstract{
      * @return void
      */
     public function lpushAction() {
+        $message = '';
         $key = "test4_komiles";
         $result = $this -> redis -> lpush($key,"1111");
         var_dump($result);
@@ -229,6 +230,7 @@ class RedisController extends Yaf_Controller_Abstract{
      * @return void
      */
     public function rpushAction() {
+        $message = '';
         $key = "test5_komiles";
         $result = $this -> redis -> lpush($key,"1111");
         var_dump($result);
@@ -247,6 +249,7 @@ class RedisController extends Yaf_Controller_Abstract{
      * @return void
      */
     public function lpopAction() {
+        $message = '';
         $key = "test6_komiles";
         $this -> redis -> delete($key);
         $this -> redis -> lpush($key,"1111");
@@ -269,6 +272,7 @@ class RedisController extends Yaf_Controller_Abstract{
      * @return void
      */
     public function rpopAction() {
+        $message = '';
         $key = "test6_komiles";
         $this -> redis -> delete($key);
         $this -> redis -> lpush($key,"1111");
@@ -291,6 +295,7 @@ class RedisController extends Yaf_Controller_Abstract{
      * @return void
      */
     public function llenAction() {
+        $message = '';
         $key = "test6_komiles";
         $result = $this -> redis -> llen($key);
         var_dump($result);
