@@ -3,6 +3,11 @@
     <?php echo $title;?>
 </title>
 <body>
-    <?php echo $title;?>
+    <h3><?php echo $title;?></h3>
+    <?php
+    foreach($url_list as $list) {
+    ?>
+        <p><span><?php echo $list['name'];?>:</span><a href="<?php echo $list['url'];?>" target="_blank"><?php echo $list['url'];?></a></p>
+    <?php } ?>
 </body>
 </html>

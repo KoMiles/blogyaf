@@ -9,7 +9,6 @@
  * @version $Id$
  * @author wangkongming <komiles@163.com> 
  * @date 2016-02-14 14:33:33
- * @from http://blog.51yip.com/cache/1439.html
  */
 
 class RedisController extends Yaf_Controller_Abstract{
@@ -20,10 +19,25 @@ class RedisController extends Yaf_Controller_Abstract{
             $this -> redis = new Redis();
         }
         $this -> redis-> connect('127.0.0.1',6379);
-        $this->title = "测试Redis";
+        $this->title = "Redis教程相关";
     }
 
     public function indexAction(){
+        $url_list = array(
+            array(
+                "name" => "Redis系统性介绍",
+                "url" => "http://blog.nosqlfan.com/html/3139.html",
+            ),
+            array(
+                "name" => "redis php 实例一",
+                "url" => "http://blog.51yip.com/cache/1439.html",
+            ),
+            array(
+                "name" => "Redis 教程",
+                "url" => "http://www.runoob.com/redis/redis-tutorial.html",
+            ),
+        );
+        $this->getView()->assign("url_list",$url_list);
         $this->getView()->assign("title",$this->title);
         $this->getView()->display('./redis/index.html');
         exit;
