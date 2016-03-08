@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello world</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="/css/article.css"/>
+    </head>
+    <body> 
+        <div>
+            <h3><?php echo $title;?></h3>
+        </div>
+        <div>
+            <form action="/testredis/add_opt" method="post">
+                用户名：<input type='username' name="username"><br/>
+                <input type='submit' value="提交">
+            </form>
+        <div/>
+    </body>
+</html>

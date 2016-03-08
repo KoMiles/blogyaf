@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello world</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="/css/article.css"/>
+    </head>
+    <body>
+        <div><h3><?php echo $title;?></h3></div>
+        <div>
+            <ul>
+                <?php foreach($data_list as $info) {?>
+                <li><span><a href="/article/detail/id/<?php echo $info['id'];?>/"><?php echo $info['title'];?></a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $info['author'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><?php echo $info['date']?></span></li>
+
+                <?php }?>
+            </ul>
+        </div>
+        <div class="pager"><?php echo $page_string;?></div>
+    </body>
+</html>

@@ -321,6 +321,17 @@ class RedisController extends Yaf_Controller_Abstract{
         $this->getView()->display('./redis/message.html');
         exit;
     }
+    
+    public function testRedisClassAction() {
+        $redis = new Db_Redis('127.0.0.1','6379');
+        var_dump($redis);
+        exit;
+
+    }
+
+
+
+
 
 
 }

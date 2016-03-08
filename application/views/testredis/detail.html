@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello world</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="/css/article.css"/>
+    </head>
+    <body> 
+        <?php if($error_msg) { ?>
+            <?php echo $error_msg;?>
+        <?php } else {?>
+            <div>
+                <h3><?php echo $title;?></h3>
+            </div>
+            <div>
+                <span>文章标题：<?php echo $data_info['title'];?></span><br/>
+                <span>文章作者：<?php echo $data_info['author'];?></span><br/>
+                <span>更新时间：<?php echo $data_info['date'];?></span><br/>
+                <span>文章内容：<p><?php echo $data_info['content'];?></p></span>
+            <div/>
+        <?php }?>
+    </body>
+</html>
