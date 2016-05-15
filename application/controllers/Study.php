@@ -27,8 +27,8 @@ class StudyController extends Yaf_Controller_Abstract {
         /*查询*/
         $sql = "SELECT * FROM `Article` limit 1";
         $stmt = $dbh->query($sql);  
-        $result = $stmt ->fetch(PDO::FETCH_ASSOC);
-        var_dump($result);exit;
+        //$result = $stmt ->fetch(PDO::FETCH_ASSOC);
+        //var_dump($result);exit;
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){     
             print_r($row);  
         }  
