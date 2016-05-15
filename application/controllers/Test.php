@@ -25,6 +25,8 @@ class TestController extends    Yaf_Controller_Abstract {
      * @return void
      */
     public function getModuleNameAction() {
+        echo __DIR__;
+        echo "<br/>";
         echo "current Module:" . $this->getRequest()->getModuleName();
         echo "<br/>";
         echo "current Controller:" . $this->getRequest()->getControllerName();
@@ -160,11 +162,11 @@ class TestController extends    Yaf_Controller_Abstract {
         exit;
 
     }
-    public function routeAction() {
-        echo "test";
-        echo "detail action ";
-        echo "route is :" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
-    }
+    //public function routeAction() {
+        //echo "test";
+        //echo "detail action ";
+        //echo "route is :" . Yaf_Dispatcher::getInstance()->getRouter()->getCurrentRoute();
+    //}
     
 
 }
