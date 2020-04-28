@@ -1,5 +1,5 @@
-## 记录yaf学习历程
-方便yaf入门，写了一个demo
+## yaf框架
+yaf-demo
 
 ## 查看代码效果
 可以通过链接<https://github.com/KoMiles/blogyaf>直接查看源码
